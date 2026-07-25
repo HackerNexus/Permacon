@@ -42,7 +42,7 @@ export default function Feedback() {
     try {
 
       const res = await fetch(
-        "http://localhost:5000/feedback"
+        "http://permacon.onrender.com/feedback"
       );
 
       const data = await res.json();
@@ -80,7 +80,7 @@ export default function Feedback() {
       setWorkingId(id);
 
       await fetch(
-        `http://localhost:5000/feedback/${id}/publish`,
+        `http://permacon.onrender.com/feedback/${id}/publish`,
         {
           method: "PATCH",
         }
@@ -113,7 +113,7 @@ export default function Feedback() {
       setWorkingId(id);
 
       await fetch(
-        `http://localhost:5000/feedback/${id}/hide`,
+        `http://permacon.onrender.com/feedback/${id}/hide`,
         {
           method: "PATCH",
         }
@@ -153,7 +153,7 @@ export default function Feedback() {
       setWorkingId(id);
 
       await fetch(
-        `http://localhost:5000/feedback/${id}`,
+        `http://permacon.onrender.com/feedback/${id}`,
         {
           method: "DELETE",
         }

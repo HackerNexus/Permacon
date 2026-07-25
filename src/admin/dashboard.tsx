@@ -26,7 +26,7 @@ export default function Dashboard() {
 
   const loadDashboard = async () => {
     try {
-      const response = await fetch("http://localhost:5000/dashboard");
+      const response = await fetch("http://permacon.onrender.com/dashboard");
       const result = await response.json();
 
       if (result.success) {

@@ -66,7 +66,7 @@ export default function Booking() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/booking",
+        "http://permacon.onrender.com/booking",
         {
           method: "POST",
           headers: {
