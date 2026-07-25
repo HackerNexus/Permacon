@@ -18,7 +18,7 @@ export default function bookings() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://permacon.onrender.com/booking")
+    fetch("https://permacon.onrender.com/booking")
       .then((res) => res.json())
       .then((data) => {
         setBookings(data);

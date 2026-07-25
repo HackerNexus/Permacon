@@ -106,7 +106,7 @@ export default function Feedback() {
 
     try {
       const response = await fetch(
-        "http://permacon.onrender.com/feedback",
+        "https://permacon.onrender.com/feedback",
         {
           method: "POST",
           headers: {
