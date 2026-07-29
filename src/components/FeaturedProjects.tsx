@@ -98,7 +98,7 @@ const projects = [
    {
     title: "Residential Development",
     location: "Nairobi, Kenya",
-    image: "/images/17.jpg",
+    image: "/images/17.jpeg",
     description:
       "Custome New Building.",
   },
