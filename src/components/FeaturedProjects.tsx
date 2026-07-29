@@ -15,98 +15,85 @@ const projects = [
     title: "Residential Development",
     location: "Nyandarua, Kenya",
     image: "/images/8.jpeg",
-    description:
-      "Tiling, Gypsum  and paint works.",
+    description: "Tiling, Gypsum and paint works.",
   },
   {
     title: "Residential Construction",
     location: "Nakuru, Kenya",
     image: "/images/9.jpeg",
-    description:
-      "Custom new building in process.",
+    description: "Custom new building in process.",
   },
   {
     title: "Proposed Design",
     location: "Kiambu, Kenya",
     image: "/images/3.jpg",
-    description:
-      "Proposed Residential Development.",
+    description: "Proposed Residential Development.",
   },
   {
     title: "School/institutional Development",
     location: "Nakuru County, Kenya",
     image: "/images/4.jpg",
-    description:
-      "Classroom construction.",
+    description: "Classroom construction.",
   },
   {
-    title: "Custom new build ",
+    title: "Custom new build",
     location: "Nakuru County, Kenya",
     image: "/images/5.jpg",
-    description:
-      "Residential Development",
+    description: "Residential Development",
   },
   {
     title: "Residential Development",
     location: "Nakuru, Kenya",
     image: "/images/10.jpeg",
-    description:
-      "Structural works.",
+    description: "Structural works.",
   },
   {
     title: "Commercial Development",
     location: "Nakuru, Kenya",
     image: "/images/11.jpeg",
-    description:
-      "Paint and Granite works.",
+    description: "Paint and Granite works.",
   },
   {
     title: "Nakuru-Naivasha District Hospital",
     location: "Nakuru, Kenya",
     image: "/images/12.jpeg",
-    description:
-      "Door and Frames fitting.",
+    description: "Door and Frames fitting.",
   },
   {
     title: "Residential Development",
     location: "Nakuru, Kenya",
     image: "/images/13.jpeg",
-    description:
-      "Custom new building upon completion.",
+    description: "Custom new building upon completion.",
   },
   {
     title: "Residential Development",
-    location: "Kiambu-Membley , Kenya",
+    location: "Kiambu-Membley, Kenya",
     image: "/images/14.png",
-    description:
-      "Renovation Works.",
+    description: "Renovation Works.",
   },
-   {
+  {
     title: "Institutional Development",
     location: "Meru University",
     image: "/images/15.jpeg",
-    description:
-      "Building construction.",
+    description: "Building construction.",
   },
-   {
+  {
     title: "Residential Development",
     location: "Nyandarua, Kenya",
     image: "/images/16.jpeg",
-    description:
-      "Apartment construction.",
+    description: "Apartment construction.",
   },
-   {
+  {
     title: "Residential Development",
     location: "Nairobi, Kenya",
     image: "/images/17.jpeg",
-    description:
-      "Custom New Building.",
+    description: "Custom New Building.",
   },
-  
 ];
 
 export default function FeaturedProjects() {
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [selectedProject, setSelectedProject] =
+    useState<number | null>(null);
 
   const nextProject = () => {
     if (selectedProject === null) return;
@@ -131,9 +118,16 @@ export default function FeaturedProjects() {
   return (
     <section
       id="projects"
-      className="py-24 bg-[#081221] text-white"
+      className="relative overflow-hidden py-24 bg-gradient-to-br from-[#06162D] via-[#0B356E] to-[#081221] text-white"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+
+      {/* Background Glow */}
+
+      <div className="absolute -top-40 -left-24 w-[28rem] h-[28rem] rounded-full bg-blue-500/10 blur-[170px]" />
+
+      <div className="absolute -bottom-40 right-0 w-[34rem] h-[34rem] rounded-full bg-cyan-400/10 blur-[190px]" />
+
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
 
         {/* Heading */}
 
@@ -144,15 +138,17 @@ export default function FeaturedProjects() {
           transition={{ duration: .7 }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-blue-400 mb-4">
+
+          <h2 className="text-4xl md:text-5xl font-bold text-blue-300 mb-5">
             Featured Projects
           </h2>
 
-          <p className="text-gray-400 max-w-3xl mx-auto text-lg">
-            A selection of some of our completed construction projects,
-            demonstrating quality workmanship, innovation and attention to
-            detail.
+          <p className="text-gray-300 max-w-3xl mx-auto text-lg leading-8">
+            A selection of some of our completed construction
+            projects demonstrating quality workmanship,
+            innovation and attention to detail.
           </p>
+
         </motion.div>
 
         {/* Projects */}
@@ -168,12 +164,12 @@ export default function FeaturedProjects() {
               viewport={{ once: true }}
               transition={{
                 duration: .6,
-                delay: index * .1,
+                delay: index * .08,
               }}
               whileHover={{
-                y: -8,
+                y: -12,
               }}
-              className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 hover:border-blue-500 transition-all"
+              className="group overflow-hidden rounded-3xl border border-blue-500/20 bg-gradient-to-br from-white/5 to-blue-900/20 backdrop-blur-xl shadow-xl hover:border-blue-400 hover:shadow-blue-500/20 transition-all duration-500"
             >
 
               {/* Image */}
@@ -183,8 +179,10 @@ export default function FeaturedProjects() {
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition duration-700 hover:scale-110"
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-110"
                 />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050816]/80 via-transparent to-transparent opacity-70 group-hover:opacity-100 transition duration-500" />
 
               </div>
 
@@ -192,9 +190,12 @@ export default function FeaturedProjects() {
 
               <div className="p-7">
 
-                <div className="flex items-center gap-2 text-blue-400 mb-4">
+                <div className="flex items-center gap-2 text-blue-300 mb-4">
 
-                  <MapPin size={18} />
+                  <MapPin
+                    size={18}
+                    className="transition-all duration-300 group-hover:text-yellow-300 group-hover:scale-110"
+                  />
 
                   <span className="text-sm">
 
@@ -204,25 +205,31 @@ export default function FeaturedProjects() {
 
                 </div>
 
-                <h3 className="text-2xl font-bold mb-4">
+                <h3 className="text-2xl font-bold mb-4 transition-colors duration-300 group-hover:text-blue-300">
 
                   {project.title}
 
                 </h3>
 
-                <p className="text-gray-400 leading-8 mb-8">
+                <p className="text-gray-300 leading-8 mb-8">
 
                   {project.description}
 
                 </p>
 
                 <button
-                  onClick={() => setSelectedProject(index)}
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl transition"
+                  onClick={() =>
+                    setSelectedProject(index)
+                  }
+                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3 font-semibold shadow-lg transition-all duration-300 hover:from-blue-500 hover:to-blue-700 hover:shadow-blue-500/40"
                 >
+
                   View Project
 
-                  <ArrowUpRight size={18} />
+                  <ArrowUpRight
+                    size={18}
+                    className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                  />
 
                 </button>
 
@@ -235,35 +242,46 @@ export default function FeaturedProjects() {
         </div>
 
       </div>
-
-      {/* ===================== MODAL ===================== */}
+            {/* ===================== MODAL ===================== */}
 
       <AnimatePresence>
 
         {selectedProject !== null && (
 
           <motion.div
-            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-5"
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-5"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
 
             <motion.div
-              initial={{ scale: .9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: .9 }}
-              className="relative bg-[#081221] rounded-3xl overflow-hidden max-w-5xl w-full"
+              initial={{
+                scale: .9,
+                opacity: 0,
+              }}
+              animate={{
+                scale: 1,
+                opacity: 1,
+              }}
+              exit={{
+                scale: .9,
+                opacity: 0,
+              }}
+              transition={{
+                duration: .35,
+              }}
+              className="relative w-full max-w-6xl overflow-hidden rounded-3xl border border-blue-500/20 bg-gradient-to-br from-[#081221] via-[#0A2F63] to-[#06162D] shadow-2xl"
             >
 
-              {/* Close */}
+              {/* Close Button */}
 
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-5 right-5 z-20 bg-white/10 p-3 rounded-full hover:bg-red-600 transition"
+                className="absolute top-5 right-5 z-30 rounded-full bg-white/10 p-3 backdrop-blur-md transition-all duration-300 hover:bg-red-600 hover:rotate-90"
               >
 
-                <X />
+                <X className="w-6 h-6" />
 
               </button>
 
@@ -271,10 +289,10 @@ export default function FeaturedProjects() {
 
               <button
                 onClick={previousProject}
-                className="absolute left-5 top-1/2 -translate-y-1/2 bg-black/60 p-3 rounded-full hover:bg-blue-600 transition"
+                className="absolute left-5 top-1/2 z-30 -translate-y-1/2 rounded-full bg-black/50 p-4 backdrop-blur-md transition-all duration-300 hover:bg-blue-600 hover:scale-110"
               >
 
-                <ChevronLeft />
+                <ChevronLeft className="w-7 h-7" />
 
               </button>
 
@@ -282,16 +300,16 @@ export default function FeaturedProjects() {
 
               <button
                 onClick={nextProject}
-                className="absolute right-5 top-1/2 -translate-y-1/2 bg-black/60 p-3 rounded-full hover:bg-blue-600 transition"
+                className="absolute right-5 top-1/2 z-30 -translate-y-1/2 rounded-full bg-black/50 p-4 backdrop-blur-md transition-all duration-300 hover:bg-blue-600 hover:scale-110"
               >
 
-                <ChevronRight />
+                <ChevronRight className="w-7 h-7" />
 
               </button>
 
               {/* Image */}
 
-              <div className="h-[65vh] bg-black">
+              <div className="relative h-[70vh] bg-black overflow-hidden">
 
                 <img
                   src={projects[selectedProject].image}
@@ -299,27 +317,33 @@ export default function FeaturedProjects() {
                   className="w-full h-full object-contain"
                 />
 
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050816]/90 via-transparent to-transparent" />
+
               </div>
 
-              {/* Content */}
+              {/* Details */}
 
               <div className="p-10">
 
-                <div className="flex items-center gap-2 text-blue-400 mb-4">
+                <div className="flex items-center gap-2 text-blue-300 mb-5">
 
-                  <MapPin size={18} />
+                  <MapPin className="w-5 h-5" />
 
-                  {projects[selectedProject].location}
+                  <span>
+
+                    {projects[selectedProject].location}
+
+                  </span>
 
                 </div>
 
-                <h2 className="text-3xl font-bold mb-5">
+                <h2 className="text-4xl font-bold mb-5">
 
                   {projects[selectedProject].title}
 
                 </h2>
 
-                <p className="text-gray-400 leading-8">
+                <p className="text-gray-300 leading-8 text-lg">
 
                   {projects[selectedProject].description}
 
@@ -334,6 +358,7 @@ export default function FeaturedProjects() {
         )}
 
       </AnimatePresence>
+
     </section>
   );
 }

@@ -7,6 +7,9 @@ import {
   Send,
   CheckCircle2,
   X,
+  MapPin,
+  ShieldCheck,
+  BadgeCheck,
 } from "lucide-react";
 
 interface BookingForm {
@@ -31,7 +34,6 @@ export default function Booking() {
   });
 
   const [loading, setLoading] = useState(false);
-
   const [success, setSuccess] = useState(false);
 
   const [bookingInfo, setBookingInfo] = useState({
@@ -53,9 +55,7 @@ export default function Booking() {
     });
   };
 
-  const closeModal = () => {
-    setSuccess(false);
-  };
+  const closeModal = () => setSuccess(false);
 
   const submitBooking = async (
     e: React.FormEvent
@@ -78,22 +78,18 @@ export default function Booking() {
 
       if (!response.ok) throw new Error();
 
-      // Save details for success popup
       setBookingInfo({
         name: form.name,
         phone: form.phone,
         service: form.service,
       });
 
-      // Show success modal
       setSuccess(true);
 
-      // Auto close after 5 seconds
       setTimeout(() => {
         setSuccess(false);
       }, 5000);
 
-      // Clear form
       setForm({
         name: "",
         email: "",
@@ -105,195 +101,235 @@ export default function Booking() {
       });
 
     } catch {
-      alert(
-        "Unable to submit your booking. Please try again."
-      );
+      alert("Unable to submit your booking. Please try again.");
     }
 
     setLoading(false);
   };
+
   return (
-  <>
-    <AnimatePresence>
+    <>
+      <AnimatePresence>
 
-      {success && (
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] bg-black/70 backdrop-blur-sm flex items-center justify-center px-6"
-        >
+        {success && (
 
           <motion.div
-            initial={{ scale: 0.8, y: 30, opacity: 0 }}
-            animate={{ scale: 1, y: 0, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={{ duration: 0.35 }}
-            className="relative w-full max-w-lg rounded-3xl bg-[#081221] border border-green-500/30 shadow-2xl p-10 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center px-6"
           >
 
-            <button
-              onClick={closeModal}
-              className="absolute right-5 top-5 text-gray-400 hover:text-white transition"
+            <motion.div
+              initial={{ scale: .8, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: .8 }}
+              transition={{ duration: .35 }}
+              className="relative max-w-lg w-full rounded-3xl bg-gradient-to-br from-[#071B35] via-[#0A2348] to-[#081221] border border-cyan-500/30 shadow-[0_0_60px_rgba(59,130,246,.25)] p-10 text-center"
             >
-              <X size={22} />
-            </button>
 
-            <div className="flex justify-center mb-6">
+              <button
+                onClick={closeModal}
+                className="absolute right-5 top-5 text-gray-400 hover:text-white"
+              >
+                <X size={22}/>
+              </button>
 
-              <div className="bg-green-500/15 p-5 rounded-full">
+              <div className="flex justify-center mb-6">
 
-                <CheckCircle2
-                  size={70}
-                  className="text-green-500"
-                />
+                <motion.div
+                  animate={{
+                    rotate:[0,8,-8,0],
+                    scale:[1,1.08,1]
+                  }}
+                  transition={{
+                    repeat:Infinity,
+                    duration:3
+                  }}
+                  className="bg-green-500/15 p-5 rounded-full"
+                >
+
+                  <CheckCircle2
+                    size={70}
+                    className="text-green-400"
+                  />
+
+                </motion.div>
 
               </div>
 
-            </div>
+              <h2 className="text-3xl font-bold mb-5">
+                Booking Submitted Successfully
+              </h2>
 
-            <h2 className="text-3xl font-bold text-white mb-4">
-              🎉 Booking Request Sent!
-            </h2>
+              <p className="text-gray-300 leading-8">
 
-            <p className="text-lg text-gray-300 leading-8">
+                Thank you
 
-              Thank you,
-              <span className="font-bold text-blue-400">
-                {" "}
-                {bookingInfo.name}
-              </span>
-              !
+                <span className="text-cyan-400 font-bold">
+                  {" "}{bookingInfo.name}
+                </span>
 
-              <br /><br />
+                .
 
-              Our team will call you at
+                <br /><br />
 
-              <span className="font-semibold text-green-400">
-                {" "}
-                {bookingInfo.phone}
-              </span>
+                We'll contact you on
 
-              {" "}to confirm your
+                <span className="text-green-400 font-semibold">
+                  {" "}{bookingInfo.phone}
+                </span>
 
-              <span className="font-semibold text-blue-400">
-                {" "}
-                {bookingInfo.service}
-              </span>
+                {" "}to discuss your
 
-              {" "}booking.
+                <span className="text-blue-400 font-semibold">
+                  {" "}{bookingInfo.service}
+                </span>
 
-              <br /><br />
+                {" "}project.
 
-              We appreciate your trust in
-              <span className="font-bold text-white">
-                {" "}
-                Permacon Enterprises
-              </span>
-              .
+              </p>
 
-            </p>
+              <button
+                onClick={closeModal}
+                className="mt-8 bg-gradient-to-r from-cyan-500 to-blue-700 px-8 py-3 rounded-xl font-semibold hover:scale-105 transition"
+              >
+                Close
+              </button>
 
-            <button
-              onClick={closeModal}
-              className="mt-8 bg-blue-600 hover:bg-blue-700 transition px-8 py-3 rounded-xl font-semibold"
-            >
-              Close
-            </button>
+            </motion.div>
 
           </motion.div>
 
-        </motion.div>
+        )}
 
-      )}
+      </AnimatePresence>
 
-    </AnimatePresence>
+      <section
+        id="booking"
+        className="relative overflow-hidden py-24 bg-gradient-to-b from-[#071B35] via-[#0A2348] to-[#041020] text-white"
+      >
 
-    <section
-      id="booking"
-      className="py-24 bg-[#050816] text-white"
-    >
-      <div className="max-w-6xl mx-auto px-6">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-cyan-500/10 blur-[150px]" />
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-5xl font-bold text-blue-400 mb-5">
-            Book A Consultation
-          </h2>
+        <div className="relative max-w-7xl mx-auto px-6">
 
-          <p className="text-gray-400 text-lg max-w-3xl mx-auto">
-            Tell us about your construction
-            project and our experts will
-            contact you with a free
-            consultation and quotation.
-          </p>
+          <motion.div
+            initial={{ opacity:0,y:30 }}
+            whileInView={{ opacity:1,y:0 }}
+            viewport={{ once:true }}
+            className="text-center mb-20"
+          >
 
-        </motion.div>
+            <h2 className="text-5xl font-bold bg-gradient-to-r from-cyan-300 via-blue-400 to-blue-600 bg-clip-text text-transparent mb-5">
+              Book A Consultation
+            </h2>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+            <p className="text-gray-300 max-w-3xl mx-auto text-lg leading-8">
+              Tell us about your project and our experts
+              will prepare a free consultation,
+              site visit and detailed quotation.
+            </p>
 
-          {/* LEFT */}
+          </motion.div>
 
-          <div>
+          <div className="grid lg:grid-cols-2 gap-12">
 
-            <div className="bg-white/5 rounded-3xl border border-white/10 p-10">
+            {/* LEFT */}
 
-              <CalendarDays className="w-14 h-14 text-blue-500 mb-6" />
+            <motion.div
+              initial={{ opacity:0,x:-40 }}
+              whileInView={{ opacity:1,x:0 }}
+              viewport={{ once:true }}
+              className="rounded-3xl border border-cyan-500/20 bg-white/5 backdrop-blur-xl p-10 shadow-xl"
+            >
+
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-700 flex items-center justify-center mb-8">
+
+                <CalendarDays
+                  className="w-10 h-10"
+                />
+
+              </div>
 
               <h3 className="text-3xl font-bold mb-5">
                 Let's Build Together
               </h3>
 
-              <p className="text-gray-400 leading-8">
-                Whether you're planning a
-                residential home,
-                commercial building,
-                renovation or civil works,
-                our experienced team is
-                ready to assist from
-                planning to completion.
+              <p className="text-gray-300 leading-8 mb-10">
+                Whether you're planning a residential,
+                commercial, renovation or civil works
+                project, our specialists are ready
+                to help from concept to completion.
               </p>
 
-              <div className="mt-10 space-y-5">
+              <div className="space-y-6">
 
-                <div className="flex gap-3">
-                  <span className="text-blue-400">✓</span>
-                  Free Site Visit
-                </div>
+                {[
+                  {
+                    icon: BadgeCheck,
+                    text:"Free Consultation"
+                  },
+                  {
+                    icon: MapPin,
+                    text:"Free Site Visit"
+                  },
+                  {
+                    icon: ShieldCheck,
+                    text:"Professional Advice"
+                  },
+                  {
+                    icon: CheckCircle2,
+                    text:"Detailed Quotation"
+                  },
+                ].map((item,index)=>{
 
-                <div className="flex gap-3">
-                  <span className="text-blue-400">✓</span>
-                  Free Consultation
-                </div>
+                  const Icon=item.icon;
 
-                <div className="flex gap-3">
-                  <span className="text-blue-400">✓</span>
-                  Professional Advice
-                </div>
+                  return(
 
-                <div className="flex gap-3">
-                  <span className="text-blue-400">✓</span>
-                  Detailed Quotation
-                </div>
+                    <motion.div
+                      key={index}
+                      whileHover={{x:8}}
+                      className="flex items-center gap-4"
+                    >
+
+                      <div className="p-3 rounded-xl bg-cyan-500/15">
+
+                        <Icon className="w-6 h-6 text-cyan-400"/>
+
+                      </div>
+
+                      <span className="text-gray-300">
+                        {item.text}
+                      </span>
+
+                    </motion.div>
+
+                  )
+
+                })}
 
               </div>
 
-            </div>
+            </motion.div>
+                      {/* RIGHT */}
 
-          </div>
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="relative overflow-hidden rounded-3xl border border-cyan-500/20 bg-gradient-to-br from-[#0A1830] via-[#102347] to-[#081221] p-8 shadow-[0_0_40px_rgba(0,140,255,0.08)]"
+          >
 
-          {/* RIGHT */}
+            {/* Glow */}
 
-          <div className="bg-white/5 rounded-3xl border border-white/10 p-8">
+            <div className="absolute -top-24 -right-24 w-56 h-56 rounded-full bg-blue-500/10 blur-3xl" />
 
             <form
               onSubmit={submitBooking}
-              className="space-y-5"
+              className="relative space-y-5"
             >
 
               <input
@@ -302,7 +338,7 @@ export default function Booking() {
                 value={form.name}
                 onChange={handleChange}
                 placeholder="Full Name"
-                className="w-full p-4 rounded-xl bg-[#101c31] border border-white/10 outline-none"
+                className="w-full rounded-xl border border-white/10 bg-[#0D1C35] p-4 text-white placeholder:text-gray-500 transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 outline-none"
               />
 
               <input
@@ -311,7 +347,7 @@ export default function Booking() {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="Email Address"
-                className="w-full p-4 rounded-xl bg-[#101c31] border border-white/10 outline-none"
+                className="w-full rounded-xl border border-white/10 bg-[#0D1C35] p-4 text-white placeholder:text-gray-500 transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 outline-none"
               />
 
               <input
@@ -320,7 +356,7 @@ export default function Booking() {
                 value={form.phone}
                 onChange={handleChange}
                 placeholder="Phone Number"
-                className="w-full p-4 rounded-xl bg-[#101c31] border border-white/10 outline-none"
+                className="w-full rounded-xl border border-white/10 bg-[#0D1C35] p-4 text-white placeholder:text-gray-500 transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 outline-none"
               />
 
               <input
@@ -329,7 +365,7 @@ export default function Booking() {
                 value={form.location}
                 onChange={handleChange}
                 placeholder="Project Location"
-                className="w-full p-4 rounded-xl bg-[#101c31] border border-white/10 outline-none"
+                className="w-full rounded-xl border border-white/10 bg-[#0D1C35] p-4 text-white placeholder:text-gray-500 transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 outline-none"
               />
 
               <select
@@ -337,7 +373,7 @@ export default function Booking() {
                 name="service"
                 value={form.service}
                 onChange={handleChange}
-                className="w-full p-4 rounded-xl bg-[#101c31] border border-white/10 outline-none"
+                className="w-full rounded-xl border border-white/10 bg-[#0D1C35] p-4 text-white transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 outline-none"
               >
                 <option value="">Select Service</option>
                 <option>Residential Construction</option>
@@ -353,7 +389,7 @@ export default function Booking() {
                 name="date"
                 value={form.date}
                 onChange={handleChange}
-                className="w-full p-4 rounded-xl bg-[#101c31] border border-white/10 outline-none"
+                className="w-full rounded-xl border border-white/10 bg-[#0D1C35] p-4 text-white transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 outline-none"
               />
 
               <textarea
@@ -362,30 +398,52 @@ export default function Booking() {
                 value={form.message}
                 onChange={handleChange}
                 placeholder="Tell us about your project..."
-                className="w-full p-4 rounded-xl bg-[#101c31] border border-white/10 outline-none"
+                className="w-full rounded-xl border border-white/10 bg-[#0D1C35] p-4 text-white placeholder:text-gray-500 transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-500/20 outline-none resize-none"
               />
-
-              <motion.button
-                whileHover={{ scale: 1.02 }}
+                            <motion.button
+                whileHover={{
+                  scale: 1.02,
+                  boxShadow: "0 0 35px rgba(0,170,255,.45)",
+                }}
                 whileTap={{ scale: 0.98 }}
                 disabled={loading}
-                className="w-full bg-blue-600 hover:bg-blue-700 rounded-xl py-4 flex justify-center items-center gap-3 font-semibold transition"
+                className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-blue-700 py-4 font-semibold text-white transition-all duration-300 disabled:opacity-60"
               >
 
-                {loading ? (
-                  "Submitting..."
-                ) : (
-                  <>
-                    <Send size={18} />
-                    Book Consultation
-                  </>
-                )}
+                {/* Animated Shine */}
+
+                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000" />
+
+                <span className="relative flex items-center justify-center gap-3">
+
+                  {loading ? (
+                    <>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{
+                          duration: 1,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                        className="h-5 w-5 rounded-full border-2 border-white border-t-transparent"
+                      />
+
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      Book Consultation
+                    </>
+                  )}
+
+                </span>
 
               </motion.button>
 
             </form>
 
-          </div>
+          </motion.div>
 
         </div>
 

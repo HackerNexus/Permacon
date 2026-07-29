@@ -41,9 +41,12 @@ export default function VisionMission() {
   return (
     <section
       id="vision"
-      className="py-24 bg-[#050816] text-white"
+      className="relative py-24 bg-[#050816] text-white overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div className="absolute top-0 left-0 w-[350px] h-[350px] bg-blue-600/10 rounded-full blur-[150px]" />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
 
         {/* Heading */}
         <motion.div
@@ -53,81 +56,233 @@ export default function VisionMission() {
           transition={{ duration: .7 }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-blue-400 mb-4">
-            Vision & Mission 
+
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
+            Vision <span className="text-blue-400">& Mission</span>
           </h2>
 
-          <p className="text-gray-400 max-w-3xl mx-auto">
+          <p className="text-gray-400 max-w-3xl mx-auto text-lg">
             Everything we do is guided by a clear vision, a strong mission,
             and values that define who we are as a construction company.
           </p>
+
         </motion.div>
 
+
         {/* Vision + Mission */}
+
         <div className="grid lg:grid-cols-2 gap-8 mb-20">
 
+
           {/* Vision */}
+
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: .7 }}
-            className="bg-white/5 border border-white/10 rounded-3xl p-10 hover:border-blue-500 transition"
+            whileHover={{ y: -8 }}
+            className="
+              bg-white/5
+              border
+              border-white/10
+              rounded-3xl
+              p-10
+              transition-all
+              hover:border-blue-500/50
+              hover:shadow-xl
+              hover:shadow-blue-500/10
+            "
           >
 
-            <div className="w-16 h-16 rounded-xl bg-blue-600/20 flex items-center justify-center mb-6">
+            <motion.div
+              whileHover={{
+                rotate: 360,
+                scale: 1.15,
+              }}
+              transition={{
+                duration: .6,
+              }}
+              className="
+                w-16
+                h-16
+                rounded-xl
+                bg-blue-600/20
+                flex
+                items-center
+                justify-center
+                mb-6
+              "
+            >
+
               <Eye className="w-8 h-8 text-blue-400" />
-            </div>
+
+            </motion.div>
+
 
             <h3 className="text-3xl font-bold mb-5 text-blue-400">
               Our Vision
             </h3>
 
+
             <p className="text-gray-300 leading-8">
               To become one of Kenya's most trusted construction companies,
               recognized for delivering innovative, sustainable and
               high-quality construction solutions that improve communities
-              and create lasting value. Permacon Enterprises vision is to be 
-              the preferred provider of cost effective and innovative 
-              construction solutions to our customers. 
+              and create lasting value. Permacon Enterprises vision is to be
+              the preferred provider of cost effective and innovative
+              construction solutions to our customers.
             </p>
+
 
           </motion.div>
 
+
+
           {/* Mission */}
+
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: .7 }}
-            className="bg-white/5 border border-white/10 rounded-3xl p-10 hover:border-blue-500 transition"
+            whileHover={{ y: -8 }}
+            className="
+              bg-white/5
+              border
+              border-white/10
+              rounded-3xl
+              p-10
+              transition-all
+              hover:border-blue-500/50
+              hover:shadow-xl
+              hover:shadow-blue-500/10
+            "
           >
 
-            <div className="w-16 h-16 rounded-xl bg-blue-600/20 flex items-center justify-center mb-6">
+            <motion.div
+              whileHover={{
+                rotate: 360,
+                scale: 1.15,
+              }}
+              transition={{
+                duration: .6,
+              }}
+              className="
+                w-16
+                h-16
+                rounded-xl
+                bg-blue-600/20
+                flex
+                items-center
+                justify-center
+                mb-6
+              "
+            >
+
               <Target className="w-8 h-8 text-blue-400" />
-            </div>
+
+            </motion.div>
+
 
             <h3 className="text-3xl font-bold mb-5 text-blue-400">
               Our Mission
             </h3>
 
+
             <p className="text-gray-300 leading-8">
-              To provide cost-effective and innovative 
-              construction solutions that satisfy the needs of our 
-              customers whilst guaranteeing continuous development and 
-              benefit to our employees. Permacon Enterprises mission is 
-              to deliver reliable construction services through workmanship, 
-              quality materials, innovation and professional project management 
-              while ensuring customer satisfaction, safety and timely project completion.
+              To provide cost-effective and innovative construction
+              solutions that satisfy the needs of our customers whilst
+              guaranteeing continuous development and benefit to our
+              employees. Permacon Enterprises mission is to deliver
+              reliable construction services through workmanship,
+              quality materials, innovation and professional project
+              management while ensuring customer satisfaction, safety
+              and timely project completion.
             </p>
+
 
           </motion.div>
 
+
         </div>
 
-        
+
+
+        {/* Core Values */}
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          {values.map((value,index)=>{
+
+            const Icon = value.icon;
+
+            return (
+
+              <motion.div
+                key={value.title}
+                initial={{ opacity:0, y:30 }}
+                whileInView={{ opacity:1, y:0 }}
+                viewport={{ once:true }}
+                transition={{ delay:index * .15 }}
+                whileHover={{ y:-8 }}
+                className="
+                  bg-white/5
+                  border
+                  border-white/10
+                  rounded-2xl
+                  p-8
+                  hover:border-blue-500/50
+                  transition-all
+                "
+              >
+
+                <motion.div
+                  whileHover={{
+                    rotate:360,
+                    scale:1.15,
+                  }}
+                  transition={{
+                    duration:.6,
+                  }}
+                  className="
+                    w-14
+                    h-14
+                    rounded-xl
+                    bg-blue-600/20
+                    flex
+                    items-center
+                    justify-center
+                    mb-5
+                  "
+                >
+
+                  <Icon className="w-7 h-7 text-blue-400" />
+
+                </motion.div>
+
+
+                <h4 className="text-xl font-bold mb-3">
+                  {value.title}
+                </h4>
+
+
+                <p className="text-gray-400 leading-relaxed">
+                  {value.description}
+                </p>
+
+
+              </motion.div>
+
+            );
+
+          })}
+
+        </div>
+
 
       </div>
+
     </section>
   );
 }

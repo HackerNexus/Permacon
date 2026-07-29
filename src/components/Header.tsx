@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, ShieldCheck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -19,7 +19,9 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+
     const handleScroll = () => {
+
       setScrolled(window.scrollY > 40);
 
       const sections = navigation.map((item) =>
@@ -27,6 +29,7 @@ export default function Header() {
       );
 
       sections.forEach((section) => {
+
         if (!section) return;
 
         const rect = section.getBoundingClientRect();
@@ -34,110 +37,167 @@ export default function Header() {
         if (rect.top <= 120 && rect.bottom >= 120) {
           setActiveSection(section.id);
         }
+
       });
+
     };
 
     window.addEventListener("scroll", handleScroll);
 
     handleScroll();
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () =>
+      window.removeEventListener("scroll", handleScroll);
+
   }, []);
 
   return (
+
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed left-0 top-0 z-50 w-full transition-all duration-500 ${
         scrolled
-          ? "bg-[#08101f]/90 backdrop-blur-xl shadow-xl border-b border-white/10"
+          ? "border-b border-cyan-500/20 bg-[#08101f]/85 backdrop-blur-2xl shadow-[0_10px_40px_rgba(0,0,0,.35)]"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto">
 
-        <div className="flex items-center justify-between h-20 px-4 md:px-8">
+      <div className="mx-auto max-w-7xl">
+
+        <div className="flex h-20 items-center justify-between px-4 md:px-8">
 
           {/* LOGO */}
 
-          <a
+          <motion.a
             href="#home"
-            className="flex items-center gap-4 group"
+            whileHover={{ scale: 1.03 }}
+            className="group flex items-center gap-4"
           >
-            <img
+
+            <motion.img
+              whileHover={{
+                rotate: 2,
+                scale: 1.08,
+              }}
+              transition={{ duration: .3 }}
               src="/images/logo.jpg"
               alt="Permacon Enterprises"
-              className="h-14 md:h-16 w-auto object-contain transition duration-300 group-hover:scale-105"
+              className="h-14 w-auto rounded-xl object-contain shadow-lg md:h-16"
             />
 
             <div>
-              <h1 className="text-xl md:text-2xl font-bold text-white leading-none">
+
+              <h1 className="text-xl font-bold leading-none text-white md:text-2xl">
+
                 Permacon
+
               </h1>
 
-              <span className="text-blue-400 text-sm tracking-widest uppercase">
-                Enterprises
-              </span>
-            </div>
-          </a>
+              <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-blue-600 bg-clip-text text-sm uppercase tracking-[0.35em] text-transparent">
 
-          {/* DESKTOP MENU */}
-          <Link
-  to="/admin/login"
-  className="inline-flex items-center gap-2 rounded-xl border border-blue-500/30 bg-blue-600 px-5 py-2.5 font-semibold text-white transition hover:bg-blue-700 hover:shadow-lg"
->
-  Admin
-</Link>
+                Enterprises
+
+              </span>
+
+            </div>
+
+          </motion.a>
+                    {/* DESKTOP MENU */}
 
           <nav className="hidden lg:flex items-center gap-10">
 
             {navigation.map((item) => (
-              <a
+
+              <motion.a
                 key={item.name}
                 href={item.href}
+                whileHover={{ y: -2 }}
                 className={`relative text-[15px] font-medium transition ${
                   activeSection === item.href.substring(1)
-                    ? "text-blue-400"
-                    : "text-gray-300 hover:text-blue-400"
+                    ? "text-cyan-300"
+                    : "text-gray-300 hover:text-cyan-300"
                 }`}
               >
+
                 {item.name}
 
                 {activeSection === item.href.substring(1) && (
+
                   <motion.div
                     layoutId="activeNav"
-                    className="absolute left-0 -bottom-2 w-full h-[2px] bg-blue-500 rounded-full"
+                    className="absolute -bottom-2 left-0 h-[2px] w-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"
                   />
+
                 )}
-              </a>
+
+              </motion.a>
+
             ))}
 
           </nav>
 
-          {/* RIGHT BUTTON */}
+          {/* RIGHT SIDE */}
 
-          <div className="hidden lg:flex">
+          <div className="hidden lg:flex items-center gap-4">
 
-            <a
-              href="#booking"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 transition text-white font-semibold shadow-lg"
+            <motion.div
+              whileHover={{
+                y: -2,
+                scale: 1.04,
+              }}
             >
-              <Phone className="w-4 h-4" />
+
+              <Link
+                to="/admin/login"
+                className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-white/5 px-5 py-3 font-semibold text-cyan-300 backdrop-blur-md transition hover:border-cyan-400 hover:bg-cyan-500/10"
+              >
+
+                <ShieldCheck className="h-4 w-4 transition group-hover:rotate-6" />
+
+                Admin
+
+              </Link>
+
+            </motion.div>
+
+            <motion.a
+              href="#booking"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 25px rgba(0,190,255,.35)",
+              }}
+              whileTap={{
+                scale: .96,
+              }}
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-700 px-6 py-3 font-semibold text-white shadow-lg transition"
+            >
+
+              <Phone className="h-4 w-4 transition group-hover:rotate-12" />
+
               Get Quote
-            </a>
+
+            </motion.a>
 
           </div>
 
-          {/* MOBILE BUTTON */}
+          {/* MOBILE MENU BUTTON */}
 
-          <button
+          <motion.button
+            whileTap={{ scale: .9 }}
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden text-white"
+            className="rounded-xl p-2 text-white transition hover:bg-white/10 lg:hidden"
           >
+
             {menuOpen ? (
-              <X className="w-8 h-8" />
+
+              <X className="h-8 w-8 transition hover:rotate-90" />
+
             ) : (
-              <Menu className="w-8 h-8" />
+
+              <Menu className="h-8 w-8 transition hover:scale-110" />
+
             )}
-          </button>
+
+          </motion.button>
 
         </div>
 
@@ -153,36 +213,63 @@ export default function Header() {
             initial={{ opacity: 0, y: -25 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -25 }}
-            transition={{ duration: 0.25 }}
-            className="lg:hidden bg-[#08101f] border-t border-white/10"
+            transition={{ duration: .25 }}
+            className="border-t border-cyan-500/20 bg-[#08101f]/95 backdrop-blur-xl lg:hidden"
           >
-            <div className="px-6 py-8 space-y-5">
+
+            <div className="space-y-5 px-6 py-8">
 
               {navigation.map((item) => (
 
-                <a
+                <motion.a
                   key={item.name}
                   href={item.href}
+                  whileHover={{ x: 8 }}
                   onClick={() => setMenuOpen(false)}
                   className={`block text-lg font-medium transition ${
                     activeSection === item.href.substring(1)
-                      ? "text-blue-400"
-                      : "text-gray-300"
+                      ? "text-cyan-300"
+                      : "text-gray-300 hover:text-cyan-300"
                   }`}
                 >
+
                   {item.name}
-                </a>
+
+                </motion.a>
 
               ))}
 
-              <a
-                href="#booking"
-                onClick={() => setMenuOpen(false)}
-                className="mt-4 inline-flex items-center justify-center gap-2 w-full rounded-xl bg-blue-600 hover:bg-blue-700 transition py-3 font-semibold"
+              <motion.div
+                whileHover={{ scale: 1.02 }}
               >
-                <Phone className="w-4 h-4" />
+
+                <Link
+                  to="/admin/login"
+                  onClick={() => setMenuOpen(false)}
+                  className="mb-4 flex w-full items-center justify-center gap-2 rounded-xl border border-cyan-500/30 bg-white/5 py-3 font-semibold text-cyan-300 transition hover:bg-cyan-500/10"
+                >
+
+                  <ShieldCheck className="h-4 w-4" />
+
+                  Admin Login
+
+                </Link>
+
+              </motion.div>
+
+              <motion.a
+                href="#booking"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: .96 }}
+                onClick={() => setMenuOpen(false)}
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-700 py-3 font-semibold text-white"
+              >
+
+                <Phone className="h-4 w-4" />
+
                 Get Quote
-              </a>
+
+              </motion.a>
 
             </div>
 
@@ -193,5 +280,7 @@ export default function Header() {
       </AnimatePresence>
 
     </header>
+
   );
+
 }
