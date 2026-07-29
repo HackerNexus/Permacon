@@ -100,7 +100,7 @@ const projects = [
     location: "Nairobi, Kenya",
     image: "/images/17.jpeg",
     description:
-      "Custome New Building.",
+      "Custom New Building.",
   },
   
 ];
