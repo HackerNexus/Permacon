@@ -131,76 +131,93 @@ export default function Team() {
 
         {/* Safety Policy */}
 
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-r from-blue-900/40 to-blue-600/10 border border-blue-500/20 rounded-3xl p-10"
-        >
+<motion.div
+  initial={{ opacity: 0, y: 35 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  className="bg-gradient-to-r from-blue-900/40 to-blue-600/10 border border-blue-500/20 rounded-3xl p-10"
+>
+  <div className="grid lg:grid-cols-2 gap-10 items-center">
 
-          <div className="flex flex-col md:flex-row gap-8 items-start">
+    {/* Left Card */}
 
-            <div className="w-20 h-20 rounded-2xl bg-blue-600/20 flex items-center justify-center">
+    <div>
 
-              <ShieldCheck className="w-10 h-10 text-blue-400" />
+      <div className="flex items-center gap-4 mb-6">
 
-            </div>
+        <div className="w-16 h-16 rounded-2xl bg-blue-600/20 flex items-center justify-center">
+          <ShieldCheck className="w-8 h-8 text-blue-400" />
+        </div>
 
-            <div>
+        <h3 className="text-3xl font-bold flex items-center gap-3">
+          <Award className="text-blue-400" />
+          Safety Policy
+        </h3>
 
-              <h3 className="text-3xl font-bold mb-6 flex items-center gap-3">
+      </div>
 
-                <Award className="text-blue-400" />
+      <p className="text-gray-300 leading-8 mb-8">
+        Safety is an integral part of every project undertaken by
+        Permacon Enterprises. We believe every employee, client,
+        supplier and visitor deserves a safe and secure working
+        environment throughout every stage of construction.
+      </p>
 
-                Safety Policy
+      <div className="grid sm:grid-cols-2 gap-5">
 
-              </h3>
+        <div className="flex gap-3">
+          <CheckCircle2 className="text-green-400 mt-1 flex-shrink-0" />
+          <span>Compliance with construction safety regulations.</span>
+        </div>
 
-              <p className="text-gray-300 leading-8 mb-6">
-                Safety is an integral part of every project undertaken by
-                Permacon Enterprises. We believe that every employee,
-                client and visitor deserves a safe working environment.
-              </p>
+        <div className="flex gap-3">
+          <CheckCircle2 className="text-green-400 mt-1 flex-shrink-0" />
+          <span>Regular safety inspections and audits.</span>
+        </div>
 
-              <div className="grid md:grid-cols-2 gap-5">
+        <div className="flex gap-3">
+          <CheckCircle2 className="text-green-400 mt-1 flex-shrink-0" />
+          <span>Proper use of Personal Protective Equipment (PPE).</span>
+        </div>
 
-                <div className="flex gap-3">
-                  <CheckCircle2 className="text-green-400 mt-1" />
-                  <span>Compliance with construction safety regulations.</span>
-                </div>
+        <div className="flex gap-3">
+          <CheckCircle2 className="text-green-400 mt-1 flex-shrink-0" />
+          <span>Continuous staff safety training.</span>
+        </div>
 
-                <div className="flex gap-3">
-                  <CheckCircle2 className="text-green-400 mt-1" />
-                  <span>Regular safety inspections and audits.</span>
-                </div>
+        <div className="flex gap-3">
+          <CheckCircle2 className="text-green-400 mt-1 flex-shrink-0" />
+          <span>Environmental protection throughout construction.</span>
+        </div>
 
-                <div className="flex gap-3">
-                  <CheckCircle2 className="text-green-400 mt-1" />
-                  <span>Proper use of Personal Protective Equipment (PPE).</span>
-                </div>
+        <div className="flex gap-3">
+          <CheckCircle2 className="text-green-400 mt-1 flex-shrink-0" />
+          <span>Zero compromise on health and safety standards.</span>
+        </div>
 
-                <div className="flex gap-3">
-                  <CheckCircle2 className="text-green-400 mt-1" />
-                  <span>Continuous staff safety training.</span>
-                </div>
+      </div>
 
-                <div className="flex gap-3">
-                  <CheckCircle2 className="text-green-400 mt-1" />
-                  <span>Environmental protection throughout construction.</span>
-                </div>
+    </div>
 
-                <div className="flex gap-3">
-                  <CheckCircle2 className="text-green-400 mt-1" />
-                  <span>Zero compromise on health and safety standards.</span>
-                </div>
+    {/* Right Card */}
 
-              </div>
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.3 }}
+      className="overflow-hidden rounded-3xl border border-white/10 shadow-2xl"
+    >
 
-            </div>
+      <img
+        src="/images/14.jpeg"
+        alt="Permacon Safety Policy"
+        className="w-full h-full object-cover"
+      />
 
-          </div>
+    </motion.div>
 
-        </motion.div>
+  </div>
+
+</motion.div>
 
       </div>
     </section>

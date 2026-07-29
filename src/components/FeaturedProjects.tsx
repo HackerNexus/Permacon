@@ -81,6 +81,27 @@ const projects = [
     description:
       "Renovation Works.",
   },
+   {
+    title: "Institutional Development",
+    location: "Meru University",
+    image: "/images/15.jpeg",
+    description:
+      "Building construction.",
+  },
+   {
+    title: "Residential Development",
+    location: "Nyandarua, Kenya",
+    image: "/images/16.jpeg",
+    description:
+      "Apartment construction.",
+  },
+   {
+    title: "Residential Development",
+    location: "Nairobi, Kenya",
+    image: "/images/17.jpg",
+    description:
+      "Custome New Building.",
+  },
   
 ];
 
